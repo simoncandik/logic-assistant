@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vzorové príklady</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page-shell">
+    <div class="top-nav">
+        <a class="nav-link" href="index.html">Domov</a>
+        <a class="nav-link" href="guided.html">Asistovaný režim</a>
+        <a class="nav-link" href="manual.html">Režim kontroly kroku</a>
+        <a class="nav-link active" href="examples.html">Vzorové príklady</a>
+    </div>
+
+    <div class="hero-card">
+        <h1>Vzorové príklady</h1>
+        <p>
+            Stránka obsahuje prehľad podporovaných zákonov ekvivalencie a ukážkové vyriešené príklady
+            po jednotlivých krokoch. Vybraný príklad je možné otvoriť priamo v asistovanom režime.
+        </p>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">Prehľad zákonov ekvivalencie</h2>
+        <div class="table-scroll">
+            <div id="rulesTableContainer"></div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">Ukážkové vyriešené príklady</h2>
+        <div id="examplesContainer" class="examples-grid"></div>
+    </div>
+</div>
+
+<script src="examples.js"></script>
+</body>
+</html>

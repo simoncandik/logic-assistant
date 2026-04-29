@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Režim kontroly kroku</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="page-shell">
+    <div class="top-nav">
+        <a class="nav-link" href="index.html">Domov</a>
+        <a class="nav-link" href="guided.html">Asistovaný režim</a>
+        <a class="nav-link active" href="manual.html">Režim kontroly kroku</a>
+        <a class="nav-link" href="examples.html">Vzorové príklady</a>
+    </div>
+
+    <div class="hero-card">
+        <h1>Režim kontroly kroku</h1>
+        <p>
+            Zadaj počiatočnú formulu alebo úsudok a potom zapisuj ďalší krok samostatne.
+            Systém overí, či ide o korektnú jednokrokovú ekvivalentnú úpravu.
+        </p>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">Zadanie formuly</h2>
+
+        <div class="input-mode-switch">
+            <span class="input-mode-label">Typ vstupu:</span>
+
+            <label class="input-mode-option">
+                <input type="radio" name="inputMode" value="formula" checked onchange="updateInputModeUI()">
+                Formula
+            </label>
+
+            <label class="input-mode-option">
+                <input type="radio" name="inputMode" value="argument" onchange="updateInputModeUI()">
+                Úsudok
+            </label>
+        </div>
+
+        <div class="toolbar-grid">
+            <div class="toolbar-group">
+                <span class="toolbar-group-title">Logické spojky a konštanty</span>
+                <div class="toolbar-buttons">
+                    <button onclick="insert('∧')">∧</button>
+                    <button onclick="insert('∨')">∨</button>
+                    <button onclick="insert('¬')">¬</button>
+                    <button onclick="insert('→')">→</button>
+                    <button onclick="insert('↔')">↔</button>
+                    <button onclick="insert('T')">T</button>
+                    <button onclick="insert('F')">F</button>
+                </div>
+            </div>
+
+            <div class="toolbar-group">
+                <span class="toolbar-group-title">Pomocné symboly</span>
+                <div class="toolbar-buttons">
+                    <button onclick="insert(', ')">,</button>
+                    <button onclick="insert('⊨')">⊨</button>
+                    <button onclick="insert('(')">(</button>
+                    <button onclick="insert(')')">)</button>
+                    <button onclick="insert('[')">[</button>
+                    <button onclick="insert(']')">]</button>
+                    <button onclick="insert('{')">{</button>
+                    <button onclick="insert('}')">}</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="input-stack" style="margin-top: 14px;">
+            <div class="input-row">
+                <input id="formula" placeholder="((p → q) ∧ p) → q" onfocus="setActiveInput('formula')">
+                <button onclick="startManual()">Spustiť</button>
+                <button onclick="undoStep()">Krok späť</button>
+                <button onclick="resetManual()">Reset</button>
+            </div>
+            <div class="helper-text" id="inputHelper">
+                Po spustení zapisuj ďalší krok do poľa nižšie.
+            </div>
+        </div>
+    </div>
+
+    <div class="main-grid">
+        <div class="stack">
+            <div class="section-card">
+                <h2 class="section-title">Aktuálna formula</h2>
+                <div id="current" class="formula-display"></div>
+                <div id="conversionInfo"></div>
+                <div id="solutionStatus"></div>
+            </div>
+
+            <div class="section-card">
+                <h2 class="section-title">Nasledujúci krok</h2>
+                <div class="input-stack">
+                    <input id="nextFormula" placeholder="Zapíš ďalšiu formulu" onfocus="setActiveInput('nextFormula')">
+                    <div>
+                        <button onclick="checkManualStep()">Over krok</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2 class="section-title">Výsledok kontroly</h2>
+                <div id="feedback"></div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2 class="section-title">História krokov</h2>
+            <div id="history"></div>
+
+            <div class="history-actions">
+                <button onclick="saveSolutionToFile()">Uložiť riešenie</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="stepDetailModal" class="modal hidden">
+    <div class="modal-content">
+        <h3>Detail kroku</h3>
+        <div id="stepDetailBody"></div>
+
+        <div class="modal-actions">
+            <button id="returnToStepBtn">Vrátiť sa na tento krok</button>
+            <button onclick="closeStepDetail()">Zavrieť</button>
+        </div>
+    </div>
+</div>
+
+<script src="manual.js"></script>
+</body>
+</html>
